@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Special Birthday</title>
+
+<style>
+body{
+  margin:0;
+  font-family: 'Trebuchet MS', sans-serif;
+  background:linear-gradient(120deg,#0f2027,#203a43,#2c5364);
+  height:100vh;
+  overflow:hidden;
+  color:white;
+}
+
+/* Center Card */
+.card{
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:340px;
+  padding:25px;
+  border-radius:25px;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(15px);
+  text-align:center;
+  box-shadow:0 0 40px #00ffe1;
+}
+
+/* Title */
+h1{
+  font-size:28px;
+  color:#00ffe1;
+}
+
+/* Typewriter */
+#type{
+  min-height:80px;
+  font-size:16px;
+  margin:15px 0;
+}
+
+/* Buttons */
+button{
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#00ffe1;
+  color:black;
+  cursor:pointer;
+  margin-top:10px;
+}
+
+/* Gift */
+.gift{
+  font-size:50px;
+  animation:shake 1s infinite;
+}
+
+@keyframes shake{
+  0%{transform:rotate(0)}
+  25%{transform:rotate(5deg)}
+  50%{transform:rotate(-5deg)}
+  75%{transform:rotate(5deg)}
+}
+
+/* Emojis */
+.emoji{
+  position:absolute;
+  font-size:20px;
+  animation:float 5s linear infinite;
+}
+
+@keyframes float{
+  from{bottom:-20px;}
+  to{bottom:100%;opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="card">
+ <div class="gift">🎁</div>
+ <h1 id="name"></h1>
+
+ <div id="type"></div>
+
+ <button onclick="surprise()">Open Surprise 💝</button>
+ <p id="hidden" style="display:none;">
+  You are rare, precious & loved more than you know 💖<br>
+  Keep smiling always 😇
+  And you are magic in human form💖
+ </p>
+</div>
+
+<script>
+let text=[
+"Today the universe celebrates YOU🦎",
+"Your smile makes the world brighter ✨",
+"Dream big, shine more 💫",
+"You deserve endless happiness 💖"
+];
+
+let i=0,j=0;
+function typeWriter(){
+ if(i<text.length){
+  if(j<text[i].length){
+   document.getElementById("type").innerHTML+=text[i][j];
+   j++;
+   setTimeout(typeWriter,60);
+  }else{
+   document.getElementById("type").innerHTML+="<br>";
+   i++; j=0;
+   setTimeout(typeWriter,500);
+  }
+ }
+}
+typeWriter();
+
+function surprise(){
+ document.getElementById("hidden").style.display="block";
+}
+
+/* Name input */
+let person=prompt("Enter Birthday Name 🎂");
+document.getElementById("name").innerHTML=
+"Happy Birthday "+person+" 🎉";
+
+/* Emojis */
+setInterval(()=>{
+ let e=document.createElement("div");
+ e.className="emoji";
+ e.innerHTML=["💖","🎉","✨","🎂","🌸"]
+ [Math.floor(Math.random()*5)];
+ e.style.left=Math.random()*100+"%";
+ document.body.appendChild(e);
+ setTimeout(()=>e.remove(),5000);
+},400);
+</script>
+
+</body>
+</html>
